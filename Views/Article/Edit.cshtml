@@ -1,0 +1,53 @@
+@model Assignment1.Models.Article
+
+@{
+    ViewData["Title"] = "Edit Article";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyApp</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<h2>Edit Article</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<!-- Form for Editing an Article -->
+<form method="post" asp-controller="Article" asp-action="Edit">
+    <!-- Hidden field to store the Article ID -->
+    <input type="hidden" asp-for="ArticleId" />
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Body"></label>
+        <textarea asp-for="Body" class="form-control" rows="5" required></textarea>
+        <span asp-validation-for="Body" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" type="datetime-local" class="form-control" required />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate"></label>
+        <input asp-for="EndDate" type="datetime-local" class="form-control" required />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-controller="Article" asp-action="Display" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,36 @@
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Visual Studio and VS Code specific
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+.vscode/launch.json
+.vscode/tasks.json
+
+# Build Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+
+`appsettings.Development.json`
+# if it holds secrets you do not want to commit.
+# appsettings.Development.json
+
+# Local database files (if you don’t want them in source control)
+*.db
+*.mdf
+*.ldf
+
+# Other local/temporary files
+*.swp
+*.bak
+*.tmp

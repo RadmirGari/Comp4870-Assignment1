@@ -1,0 +1,63 @@
+﻿@model Assignment1.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyApp</title>
+    <link rel="stylesheet" href="~/wwwroot/css/site.css" />
+</head>
+<body>
+    <div class="formDiv">
+        <div class="col-md-4">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <h2>Create a new account.</h2>
+                <hr />
+
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.Input.Email, new { htmlAttributes = new { @class = "form-control", autocomplete = "username", placeholder = "name@example.com" } })
+                    @Html.LabelFor(model => model.Input.Email)
+                    @Html.ValidationMessageFor(model => model.Input.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.Input.Password, new { htmlAttributes = new { @class = "form-control", autocomplete = "new-password", placeholder = "password" } })
+                    @Html.LabelFor(model => model.Input.Password)
+                    @Html.ValidationMessageFor(model => model.Input.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.Input.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", autocomplete = "new-password", placeholder = "password" } })
+                    @Html.LabelFor(model => model.Input.ConfirmPassword)
+                    @Html.ValidationMessageFor(model => model.Input.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.Input.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                    @Html.LabelFor(model => model.Input.FirstName)
+                    @Html.ValidationMessageFor(model => model.Input.FirstName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.Input.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                    @Html.LabelFor(model => model.Input.LastName)
+                    @Html.ValidationMessageFor(model => model.Input.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                <hr />
+                <p>
+                    @Html.ActionLink("Have an account? Login.", "Login", "Account")
+                </p>
+            }
+        </div>
+    </div>
+
+</body>
+</html>

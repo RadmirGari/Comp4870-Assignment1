@@ -1,0 +1,52 @@
+@model Assignment1.Models.Article
+@inject UserManager<User> UserManager
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border rounded p-4">
+        <h2 class="text-primary">@Model.Title</h2>
+        <p class="text-muted"><strong>By:</strong> @Model.ContributorUsername</p>
+        <p class="text-muted"><strong>Published on:</strong> @Model.CreateDate.ToString("MMMM dd, yyyy")</p>
+    </div>
+
+    <hr>
+
+    <div class="card shadow-sm border rounded p-4 mt-3">
+        <p class="article-body">@Html.Raw(Model.Body)</p> 
+    </div>
+
+    <hr>
+
+    <div class="card shadow-sm border rounded p-4 mt-3">
+        <p><strong>Start Date:</strong> @Model.StartDate.ToString("MMMM dd, yyyy")</p>
+        <p><strong>End Date:</strong> @Model.EndDate.ToString("MMMM dd, yyyy")</p>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <a href="@Url.Action("Index", "Article")" class="btn btn-primary">Back to Home</a>
+
+<div class="mt-3">
+    @if (User.Identity.IsAuthenticated){
+        var user = await UserManager.GetUserAsync(User);
+        
+        if (User.Identity.Name == Model.ContributorUsername || user.Role == "Admin")
+        {
+            <a href="@Url.Action("Edit", "Article", new { id = Model.ArticleId })" class="btn btn-warning ms-2">Edit</a>
+            <form method="post" asp-controller="Article" asp-action="Delete" asp-route-id="@Model.ArticleId" class="d-inline">
+            <button type="submit" class="btn btn-danger ms-2">
+            Delete
+            </button>
+</form>
+
+        }
+    }
+</div>
+
+<style>
+    .article-body {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+</style>
