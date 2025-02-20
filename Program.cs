@@ -43,11 +43,15 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
+        // Ensure the database is up to date.
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        context.Database.Migrate();
+
+        // Run seeding logic
         await SeedData.InitializeAsync(services);
     }
     catch (Exception ex)
     {
-        // Log any errors during seeding
         var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred seeding the DB.");
     }
