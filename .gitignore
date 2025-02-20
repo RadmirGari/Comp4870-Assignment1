@@ -25,8 +25,6 @@ Thumbs.db
 # if it holds secrets you do not want to commit.
 # appsettings.Development.json
 
-# Local database files (if you don’t want them in source control)
-*.db
 *.mdf
 *.ldf
 
